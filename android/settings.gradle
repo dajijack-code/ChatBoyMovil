@@ -1,2 +1,37 @@
-include ':app'
-rootProject.name = 'chatboy_voice'
+import java.util.Properties
+import java.io.FileNotFoundException
+
+pluginManagement {
+    def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
+    def localProperties = new Properties()
+
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withReader("UTF-8") { reader -> localProperties.load(reader) }
+    } else {
+        throw new FileNotFoundException("local.properties file not found. Please create a local.properties file and define the flutter.sdk path.")
+    }
+
+    def flutterSdkPath = localProperties.getProperty("flutter.sdk")
+    if (flutterSdkPath == null) {
+        throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+    }
+
+    includeBuild("${flutterSdkPath}/packages/flutter_tools/gradle")
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "chatboy_voice"
+include ":app"
