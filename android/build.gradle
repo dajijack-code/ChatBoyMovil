@@ -1,33 +1,7 @@
-import java.util.Properties
-import java.io.File
-import java.io.FileNotFoundException
-
-buildscript {
-    ext.kotlin_version = '1.9.10'
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+    id "com.android.application" version "8.1.2" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.10" apply false
 }
-
-def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
-def localProperties = new Properties()
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader -> localProperties.load(reader) }
-} else {
-    throw new FileNotFoundException("local.properties file not found. Please create a local.properties file and define the flutter.sdk path.")
-}
-
-def flutterRoot = localProperties.getProperty("flutter.sdk")
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
-
-apply from: "${flutterRoot}/packages/flutter_tools/gradle/app_plugin_loader.gradle"
 
 allprojects {
     repositories {
