@@ -33,6 +33,17 @@ lib/
 2. Proporciona token y endpoint desde el panel de ajustes dentro de la aplicación.
 3. Opcionalmente configura la frase de activación, frase de terminación y voz preferida.
 
+### Android
+
+Tras clonar el repositorio, ejecuta el siguiente comando dentro de la carpeta `android/` para regenerar el Gradle Wrapper de forma local:
+
+```bash
+cd android
+gradle wrapper
+```
+
+Esto descargará el `gradle-wrapper.jar` necesario para los comandos de `gradlew` sin añadir el binario al control de versiones.
+
 ## Ejecución
 
 ```bash
